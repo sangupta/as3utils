@@ -31,44 +31,122 @@ package org.myjerry.as3utils {
 	 */
 	public class SystemUtils {
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is any
+		 * variant of the Microsoft Windows operating system, <code>false</code>
+		 * otherwise.
+		 */  
 		public static function isWindows():Boolean {
-			var os:String = Capabilities.os;
-			if(os.indexOf('Windows') != -1) {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows')) {
 				return true;
 			}
 			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is any
+		 * variant of the Apple Macintosh operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isMac():Boolean {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'mac os')) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is any
+		 * variant of the Linux operating system, <code>false</code> otherwise.
+		 */
 		public static function isLinux():Boolean {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'linux')) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Microsoft Windows XP operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isWindowsXP():Boolean {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows xp')) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Microsoft Windows 7 operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isWindows7():Boolean {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows 7')) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Microsoft Windows Vista operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isWindowsVista():Boolean {
+			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows vista')) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Apple Macintosh Tiger (10.4) operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isMacTiger():Boolean {
+			var os:String = Capabilities.os;
+			if(StringUtils.containsIgnoreCase(os, 'mac os') && os.indexOf('10.4') != -1) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Apple Macintosh Leopard (10.5) operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isMacLeopard():Boolean {
+			var os:String = Capabilities.os;
+			if(StringUtils.containsIgnoreCase(os, 'mac os') && os.indexOf('10.5') != -1) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Apple Macintosh Snow Leopard (10.6) operating system, <code>false</code>
+		 * otherwise.
+		 */
 		public static function isMacSnowLeopard():Boolean {
+			var os:String = Capabilities.os;
+			if(StringUtils.containsIgnoreCase(os, 'mac os') && os.indexOf('10.6') != -1) {
+				return true;
+			}
+			
 			return false;
 		}
 	}
