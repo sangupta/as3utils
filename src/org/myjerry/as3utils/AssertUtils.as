@@ -34,6 +34,27 @@ package org.myjerry.as3utils {
 	public class AssertUtils {
 		
 		/**
+		 * <code>AssertUtils</code> instances should NOT be constructed in standard programming.
+		 */
+		public function AssertUtils() {
+			super();
+		}
+		
+		/**
+		 * Assertion method to check if an object is not null, or throw an <code>Error</code>
+		 * in case it is.
+		 */
+		public static function notNull(object:Object, errorMessage:String = null):void {
+			if(object == null) {
+				if(errorMessage == null) {
+					errorMessage = 'ASSERT FAIL: Object is null.';
+					
+					throw new Error(errorMessage);
+				}
+			}
+		}
+		
+		/**
 		 * Returns <code>true</code> if the given Array object is <code>null</code>
 		 * or contains no element, <code>false</code> otherwise.
 		 */

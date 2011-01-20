@@ -29,16 +29,34 @@ package org.myjerry.as3utils {
 	 */
 	public class BooleanUtils {
 		
+		/**
+		 * String representation for <code>Boolean true</code> in Yes/No format.
+		 */
 		public static const YES:String = 'Yes';
 		
+		/**
+		 * String representation for <code>Boolean false</code> in Yes/No format.
+		 */
 		public static const NO:String = 'No';
 		
+		/**
+		 * String representation for <code>Boolean true</code> in True/False format.
+		 */
 		public static const TRUE:String = 'True';
 		
+		/**
+		 * String representation for <code>Boolean false</code> in True/False format.
+		 */
 		public static const FALSE:String = 'False';
 		
+		/**
+		 * String representation for <code>Boolean true</code> in On/Off format.
+		 */
 		public static const ON:String = 'On';
 		
+		/**
+		 * String representation for <code>Boolean false</code> in On/Off format.
+		 */
 		public static const OFF:String = 'Off';
 		
 		/**
@@ -48,6 +66,9 @@ package org.myjerry.as3utils {
 			super();
 		}
 		
+		/**
+		 * Return the opposite of the given <code>Boolean</code>.
+		 */
 		public static function negate(bool:Boolean):Boolean {
 			return !bool;
 		}
@@ -136,6 +157,10 @@ package org.myjerry.as3utils {
 			throw new ArgumentError("Boolean value must be amongst 'yes' or 'no' case-insensitive, got: " + bool); 
 		}
 		
+		/**
+		 * Convert the given <code>Boolean</code> value to a string 
+		 * representation in On/Off format.
+		 */ 
 		public static function toStringOnOff(bool:Boolean):String {
 			if(bool) {
 				return ON;
@@ -144,6 +169,10 @@ package org.myjerry.as3utils {
 			return OFF;
 		}
 		
+		/**
+		 * Convert the given <code>Boolean</code> value to a string 
+		 * representation in True/False format.
+		 */ 
 		public static function toStringTrueFalse(bool:Boolean):String {
 			if(bool) {
 				return TRUE;
@@ -152,6 +181,10 @@ package org.myjerry.as3utils {
 			return FALSE;
 		}
 		
+		/**
+		 * Convert the given <code>Boolean</code> value to a string 
+		 * representation in Yes/No format.
+		 */ 
 		public static function toStringYesNo(bool:Boolean):String {
 			if(bool) {
 				return YES;
