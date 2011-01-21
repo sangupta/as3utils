@@ -25,30 +25,37 @@ package org.myjerry.as3utils.filefilter {
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that are either hidden or not.
+	 * based on a given cutoff size. Can filter either files smalled or 
+	 * larger in size (cutoff included in both cases). 
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class HiddenFileFilter implements IFileFilter {
+	public class SizeFileFilter implements IFileFilter {
 		
-		private var hidden:Boolean;
+		private var size:Number = 0;
+		
+		private var larger:Boolean = false;
 		
 		/**
 		 * Contructor.
 		 */
-		public function HiddenFileFilter(hidden:Boolean = true) {
+		public function SizeFileFilter(size:uint, larger:Boolean = false) {
 			super();
 			
-			this.hidden = hidden;
+			if(size == 0) {
+				throw new ArgumentError('Use EmptyFileFilter to filter out empty sized files.');
+			}
+			
+			this.size = size;
 		}
 		
 		public function accept(file:File):Boolean {
-			if(file.isHidden == hidden) {
-				return true;
+			if(larger) {
+				return file.size >= this.size;
 			}
 			
-			return false;
+			return file.size <= this.size;
 		}
 	}
 }

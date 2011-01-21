@@ -25,30 +25,37 @@ package org.myjerry.as3utils.filefilter {
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that are either hidden or not.
+	 * based on a cutoff time. Can filter either newer files or older (cutoff 
+	 * included in both cases). 
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class HiddenFileFilter implements IFileFilter {
+	public class AgeFileFilter implements IFileFilter {
 		
-		private var hidden:Boolean;
+		private var cutoff:Number = 0;
+		
+		private var older:Boolean = false;
 		
 		/**
 		 * Contructor.
 		 */
-		public function HiddenFileFilter(hidden:Boolean = true) {
+		public function AgeFileFilter(date:Date, older:Boolean = false) {
 			super();
 			
-			this.hidden = hidden;
+			if(date == null) {
+				throw new ArgumentError('Date cannot be null.');
+			}
+			
+			this.cutoff = date.time;
 		}
 		
 		public function accept(file:File):Boolean {
-			if(file.isHidden == hidden) {
-				return true;
+			if(older) {
+				return file.modificationDate.time <= cutoff;
 			}
 			
-			return false;
+			return file.modificationDate.time >= cutoff;
 		}
 	}
 }

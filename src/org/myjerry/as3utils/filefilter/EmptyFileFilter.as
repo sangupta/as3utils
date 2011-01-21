@@ -25,26 +25,23 @@ package org.myjerry.as3utils.filefilter {
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that are either hidden or not.
+	 * that are emtpy in size. Will filter out any directories passed to the
+	 * filter. 
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class HiddenFileFilter implements IFileFilter {
-		
-		private var hidden:Boolean;
+	public class EmptyFileFilter implements IFileFilter {
 		
 		/**
 		 * Contructor.
 		 */
-		public function HiddenFileFilter(hidden:Boolean = true) {
+		public function EmptyFileFilter() {
 			super();
-			
-			this.hidden = hidden;
 		}
 		
 		public function accept(file:File):Boolean {
-			if(file.isHidden == hidden) {
+			if(file.size == 0 && !file.isDirectory) {
 				return true;
 			}
 			
