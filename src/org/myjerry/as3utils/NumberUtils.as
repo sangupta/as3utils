@@ -36,6 +36,9 @@ package org.myjerry.as3utils {
 			super();
 		}
 		
+		/**
+		 * Pre-computed array of factorials that fit in the <code>uint</code>.
+		 */
 		private static const FACTORIALS:Array = [
 			1,
 			1,
@@ -102,19 +105,20 @@ package org.myjerry.as3utils {
 	     * Stein (1961).
 	     * 
 	     * Special cases:
-	     * <ul>
-	     * <li>The invocations
+		 * 
+	     * The invocations,
 	     * <code>gcd(int.MIN_VALUE, int.MIN_VALUE)</code>,
 	     * <code>gcd(int.MIN_VALUE, 0)</code> and
 	     * <code>gcd(0, int.MIN_VALUE)</code> throw an
 	     * <code>ArithmeticException</code>, because the result would be 2^31, which
-	     * is too large for an int value.</li>
-	     * <li>The result of <code>gcd(x, x)</code>, <code>gcd(0, x)</code> and
+	     * is too large for an int value.
+		 * 
+	     * The result of <code>gcd(x, x)</code>, <code>gcd(0, x)</code> and
 	     * <code>gcd(x, 0)</code> is the absolute value of <code>x</code>, except
 	     * for the special cases above.
-	     * <li>The invocation <code>gcd(0, 0)</code> is the only one which returns
-	     * <code>0</code>.</li>
-	     * </ul>
+	     * 
+		 * The invocation <code>gcd(0, 0)</code> is the only one which returns
+	     * <code>0</code>.
 		 */
 		public static function gcd(p:int, q:int):int {
 			var u:int = p;

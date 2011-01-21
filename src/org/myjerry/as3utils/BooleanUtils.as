@@ -73,6 +73,13 @@ package org.myjerry.as3utils {
 			return !bool;
 		}
 		
+		/**
+		 * Performs an xor on a set of booleans.
+		 * 
+		 * <code>BooleanUtils.xor(new boolean[] { true, true })   = false</code>
+		 * <code>BooleanUtils.xor(new boolean[] { false, false }) = false</code>
+		 * <code>BooleanUtils.xor(new boolean[] { true, false })  = true</code>
+		 */
 		public static function xor(array:Array):Boolean {
 			// Validate input
 			if(array == null) {

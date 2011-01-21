@@ -38,6 +38,11 @@ package org.myjerry.as3utils {
 		public static const EMPTY:String = "";
 		
 		/**
+		 * String containing all white space characters.
+		 */
+		private static const WHITESPACES:String = " \n\t";
+		
+		/**
 		 * <code>StringUtils</code> instances should NOT be constructed in standard programming.
 		 */
 		public function StringUtils() {
@@ -53,14 +58,128 @@ package org.myjerry.as3utils {
 			return camelLetters.toLowerCase();
 		}
 		
-		public static function abbreviate(string:String, maxWidth:uint):String {
-			return null;
+		/**
+		 * Abbreviate a given string by padding it with ellipsis at the end (and at start if needed).
+		 */
+		public static function abbreviate(string:String, maxWidth:uint, offset:uint = 0):String {
+			if(string == null) {
+				return null;
+			}
+			
+			if(maxWidth < 4) {
+				throw new ArgumentError('Minimum abbreviation width is 4');
+			}
+			
+			var length:uint = string.length;
+			
+			if(length <= maxWidth) {
+				return string;
+			}
+			
+			if(offset > length) {
+				offset = length;
+			} 
+			
+			if ((length - offset) < (maxWidth - 3)) {
+				offset = length - (maxWidth - 3);
+			}
+			if (offset <= 4) {
+				return string.substring(0, maxWidth - 3) + "...";
+			}
+			
+			if (maxWidth < 7) {
+				throw new ArgumentError("Minimum abbreviation width with offset is 7");
+			}
+			
+			if ((offset + (maxWidth - 3)) < length) {
+				return "..." + abbreviate(string.substring(offset), maxWidth - 3);
+			}
+			
+			return "..." + string.substring(length - (maxWidth - 3));
 		}
 		
-		public static function center(string:String, size:uint, padString:String = ""):String {
-			return null;
+		/**
+		 * Center a given string by padding with the given pad character (or blank space) in the specified length.
+		 */
+		public static function center(string:String, size:uint, padChar:String = " "):String {
+			if (AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+
+			if(padChar.length != 1) {
+				throw new ArgumentError('Padding character should be exactly 1 character in length, got: ' + padChar);
+			}
+
+			var strLen:int = string.length;
+			var pads:int = size - strLen;
+			
+			if (pads <= 0) {
+				return string;
+			}
+			
+			string = leftPad(string, strLen + pads / 2, padChar);
+			string = rightPad(string, size, padChar);
+			
+			return string;
 		}
 		
+		/**
+		 * Left pad the given string with the given pad character (or blank space) to bring 
+		 * it to the given minimum size.
+		 */ 
+		public static function leftPad(string:String, size:uint, padChar:String = " "):String {
+			if (string == null) {
+				return null;
+			}
+			
+			if(padChar.length != 1) {
+				throw new ArgumentError('Padding character should be exactly 1 character in length, got: ' + padChar);
+			}
+			
+			var pads:int = size - string.length;
+			
+			if (pads <= 0) {
+				return string; // returns original String when possible
+			}
+			
+			var padding:String = "";
+			for (var i:int = 0; i < pads; i++) {
+				padding += padChar;
+			}
+			
+			return padding + string;
+		}
+		
+		/**
+		 * Right pad the given string with the given pad character (or blank space) to bring 
+		 * it to the given minimum size.
+		 */
+		public static function rightPad(string:String, size:uint, padChar:String = " "):String {
+			if (string == null) {
+				return null;
+			}
+			
+			if(padChar.length != 1) {
+				throw new ArgumentError('Padding character should be exactly 1 character in length, got: ' + padChar);
+			}
+			
+			var pads:int = size - string.length;
+			
+			if (pads <= 0) {
+				return string; // returns original String when possible
+			}
+			
+			var padding:String = "";
+			for (var i:int = 0; i < pads; i++) {
+				padding += padChar;
+			}
+			
+			return string + padding;
+		}
+		
+		/**
+		 * Test equality in two given strings, <i>case-sensitively</i>.
+		 */
 		public static function equals(string1:String, string2:String):Boolean {
 			if(string1 == null || string2 == null) {
 				return false;
@@ -77,6 +196,9 @@ package org.myjerry.as3utils {
 			return false;
 		}
 		
+		/**
+		 * Test equality in two given strings, <i>case-insensitively</i>.
+		 */
 		public static function equalsIgnoreCase(string1:String, string2:String):Boolean {
 			if(string1 == null || string2 == null) {
 				return false;
@@ -129,12 +251,49 @@ package org.myjerry.as3utils {
 			return string.substring(string.length - length);
 		}
 		
+		/**
+		 * Removes all leading whitespaces from the given string.
+		 */
 		public static function leftTrim(string:String):String {
-			return null;
+			if(AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+			
+			for(var index:int = 0; index < string.length; index++) {
+				if(WHITESPACES.indexOf(string.charAt(index)) == -1) {
+					return string.substr(index);
+				}
+			}
+			
+			return EMPTY;
 		}
 		
+		/**
+		 * Removes all trailing whitespaces from the given string.
+		 */
 		public static function rightTrim(string:String):String {
-			return null;
+			if(AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+
+			for(var index:int = string.length; index > 0; index--) {
+				if(WHITESPACES.indexOf(string.charAt(index - 1)) == -1) {
+					return string.substring(0, index);
+				}
+			}
+			
+			return EMPTY;
+		}
+		
+		/**
+		 * Removes all leading and trailing whitespaces from the given string.
+		 */
+		public static function trim(string:String):String {
+			if(AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+
+			return StringUtil.trim(string);
 		}
 		
 		/**
@@ -175,20 +334,26 @@ package org.myjerry.as3utils {
 			return null;
 		}
 		
+		/**
+		 * Converts the first character of the string to upper case (if needed).
+		 */
 		public static function capitalize(string:String):String {
-			return null;
+			if (AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+			
+			return string.charAt(0).toUpperCase() + string.substring(1);
 		}
-		
+
+		/**
+		 * Converts the first character of the string to lower case (if needed).
+		 */
 		public static function uncapitalize(string:String):String {
-			return null;
-		}
-		
-		public static function chomp(string:String):String {
-			return null;
-		}
-		
-		public static function chompString(string:String):String {
-			return null;
+			if (AssertUtils.isEmptyString(string)) {
+				return string;
+			}
+			
+			return string.charAt(0).toLowerCase() + string.substring(1);
 		}
 		
 		/**
@@ -240,13 +405,20 @@ package org.myjerry.as3utils {
 			return false;
 		}
 		
+		/**
+		 * Convert the given string to a <code>Boolean</code> value. Returns <code>true</code> if the string is
+		 * any of <code>'yes', 'true', or 'on'</code>. Returns <code>false</code> if the string is any of <code>
+		 * 'no', 'false', or 'off'</code>. Returns the mentioned default value if the string is <code>null</code>,
+		 * empty or any other given string. 
+		 */
 		public static function getBoolean(boolString:String, defaultValue:Boolean = false):Boolean {
 			if(AssertUtils.isNotEmptyString(boolString)) {
 				boolString = StringUtil.trim(boolString.toLowerCase());
-				if(equals("yes", boolString) || equals("true", boolString)) {
+				if(equals("yes", boolString) || equals("true", boolString) || equals("on", boolString)) {
 					return true;
 				}
-				if(equals("no", boolString) || equals("false", boolString)) {
+				
+				if(equals("no", boolString) || equals("false", boolString) || equals("off", boolString)) {
 					return false;
 				}
 				
@@ -255,11 +427,15 @@ package org.myjerry.as3utils {
 			return defaultValue; 
 		}
 		
-		public static function getNumber(num:String):Number {
-			if(AssertUtils.isEmptyString(num)) {
+		/**
+		 * Convert the given string to a <code>Number</code>. Returns ZERO if the string is <code>null</code>, or empty.
+		 */
+		public static function getNumber(number:String):Number {
+			if(AssertUtils.isEmptyString(number)) {
 				return 0;
 			}
-			return Number(num);
+			
+			return Number(number);
 		}
 	}
 }

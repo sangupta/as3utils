@@ -543,7 +543,11 @@ package org.myjerry.as3utils {
 			}
 		}
 		
-		public static function getFilesWithExtension(directory:File, filter:IFileFilter = null):Array {
+		/**
+		 * Returns a list of all files/directories inside the given directory. Provides a mechanism
+		 * to filter out specific files from all the files.
+		 */
+		public static function getFilesInDirectory(directory:File, filter:IFileFilter = null):Array {
 			checkDirectory(directory);
 			
 			var files:Array = directory.getDirectoryListing();
