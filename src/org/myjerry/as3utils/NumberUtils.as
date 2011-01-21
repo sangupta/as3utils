@@ -24,8 +24,8 @@ package org.myjerry.as3utils {
 	/**
 	 * Modelled around the Apache Commons <code>MathUtils.java</code>.
 	 * 
-	 * @author sangupta
-	 * @since Jan 21, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class NumberUtils {
 		

@@ -19,38 +19,44 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter
-{
+package org.myjerry.as3utils {
+	
 	import flash.filesystem.File;
 	
 	/**
-	 * An implementation of <code>FileFilter</code> that selects files matching
-	 * a given file extension.
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class ExtensionFileFilter implements IFileFilter {
+	public class XMLUtils {
 		
-		private var extension:String = null;
-		
-		public function ExtensionFileFilter(extension:String) {
+		/**
+		 * <code>XMLUtils</code> instances should NOT be constructed in standard programming.
+		 */
+		public function XMLUtils() {
 			super();
-			
-			if(extension == null) {
-				throw new ArgumentError('Extension cannot be null. Leave empty to match files with no extension.');
-			}
-			
-			this.extension = extension;
 		}
 		
-		public function accept(file:File):Boolean {
-			var ex:String = file.extension;
-			if(this.extension == ex) {
-				return true;
-			}
+		/**
+		 * Reads the contents of the file at the specified path and
+		 * returns an <code>XML</code> object of it.
+		 */ 
+		public static function readFilePathToXML(path:String):XML {
+			var contents:String = FileUtils.readFileToString(new File(path));
+			var xml:XML = new XML(contents);
 			
-			return false;
+			return xml;
+		}
+		
+		/**
+		 * Reads the contents of the given <code>File</code> and returns
+		 * an <code>XML</code> object of it.
+		 */
+		public static function readFileToXML(file:File):XML {
+			var contents:String = FileUtils.readFileToString(file);
+			var xml:XML = new XML(contents);
+			
+			return xml;
 		}
 	}
 }

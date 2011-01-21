@@ -26,8 +26,8 @@ package org.myjerry.as3utils {
 	/**
 	 * General helper functions to work with platform dependencies.
 	 * 
-	 * @author sangupta
-	 * @since Jan 19, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class SystemUtils {
 		

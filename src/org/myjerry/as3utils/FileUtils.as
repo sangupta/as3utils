@@ -25,12 +25,15 @@ package org.myjerry.as3utils {
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.net.FileFilter;
+	
+	import org.myjerry.as3utils.filefilter.IFileFilter;
 	
 	/**
 	 * General file manipulation utilities.
 	 * 
-	 * @author sangupta
-	 * @since Jan 19, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class FileUtils {
 		
@@ -49,7 +52,18 @@ package org.myjerry.as3utils {
 		 */
 		public static const ONE_GB:uint = 1073741824;
 		
+		/**
+		 * <code>FileUtils</code> instances should NOT be constructed in standard programming.
+		 */
+		public function FileUtils() {
+			super();
+		}
+		
+		/**
+		 * Delete a given file or directory (and all its sub-directories).
+		 */
 		public static function forceDelete(file:File):void {
+			// sanity checks
 			if(file == null) {
 				throw new ArgumentError('File/Directory cannot be null.');
 			}
@@ -58,6 +72,7 @@ package org.myjerry.as3utils {
 				throw new ArgumentError('File/Directory ' + file.name + ' does not exists.');
 			}
 			
+			// go ahead
 			if(file.isDirectory) {
 				deleteDirectory(file);
 			}
@@ -114,7 +129,7 @@ package org.myjerry.as3utils {
 		/**
 		 * Copies a whole directory to a new location.
 		 */
-		public static function copyDirectory(srcDir:File, destDir:File):void {
+		public static function copyDirectory(srcDir:File, destDir:File, filter:IFileFilter = null):void {
 			checkDirectory(srcDir);
 			
 			if(destDir == null) {
@@ -135,34 +150,64 @@ package org.myjerry.as3utils {
 				
 			}
 			
-			doCopyDirectory(srcDir, destDir, exclusionList, null);
+			doCopyDirectory(srcDir, destDir, exclusionList, filter);
 		}
 		
-		private static function doCopyDirectory(srcDir:File, destDir:File, exclusionList:Array, filter):void {
+		/**
+		 * Internal function to copy directory.
+		 */
+		private static function doCopyDirectory(srcDir:File, destDir:File, exclusionList:Array, filter:IFileFilter):void {
 			// create destination if needed
 			if(!destDir.exists) {
 				destDir.createDirectory();
 			}
 			
+			if(destDir.exists && !destDir.isDirectory) {
+				throw new IOError('Destination ' + destDir.nativePath + ' is a file and not a directory.');
+			}
+			
+			var exclusion:Boolean = AssertUtils.isNotEmptyArray(exclusionList);
+
 			// recursively copy
-			
-		}
-		
-		public static function copyDirectoryFiltered(srcDir:File, destDir:File, filter):void {
-			
+			var files:Array = srcDir.getDirectoryListing();
+			if(AssertUtils.isNotEmptyArray(files)) {
+				for each(var file:File in files) {
+					var targetFile:File = destDir.resolvePath(file.name);
+					if(!exclusion) {
+						if(file.isDirectory) {
+							doCopyDirectory(file, targetFile, exclusionList, filter); 
+						} else {
+							copyFile(file, targetFile, true);
+						}
+					}
+				}
+			}
 		}
 		
 		/**
 		 * Copies a file to a new location.
 		 */
-		public static function copyFile(srcFile:File, destFile:File):void {
+		public static function copyFile(srcFile:File, destFile:File, overwrite:Boolean = false):void {
+			// sanity checks
+			checkFile(srcFile);
 			
+			if(destFile == null) {
+				throw new ArgumentError('Destination cannot be null.');
+			}
+			
+			if(!overwrite && !destFile.isDirectory && destFile.exists) {
+				throw new IOError('Destination file already exists, overwrite is prevented.');
+			}
+			
+			// copy the file
+			srcFile.copyTo(destFile, overwrite);
 		}
 		
 		/**
 		 * Deletes a directory recursively.
 		 */
 		public static function deleteDirectory(directory:File):void {
+			// sanity checks
 			if(directory == null) {
 				throw new ArgumentError('Directory cannot be null.');
 			}
@@ -175,6 +220,7 @@ package org.myjerry.as3utils {
 				throw new ArgumentError('Directory ' + directory.nativePath + ' is not a directory.');
 			}
 			
+			// delete the directory
 			directory.deleteDirectory(true);
 		}
 		
@@ -182,10 +228,12 @@ package org.myjerry.as3utils {
 		 * Deletes a file, never throwing an exception.
 		 */
 		public static function deleteQuitely(file:File):Boolean {
+			// sanity check
 			if(file == null) {
 				return false;
 			}
 			
+			// delete the file/directory
 			if(file.isDirectory) {
 				try {
 					deleteDirectory(file);
@@ -292,20 +340,93 @@ package org.myjerry.as3utils {
 			return sum;
 		}
 		
+		/**
+		 * Move the given directory from one location to another. In case the destination directory
+		 * is a child of the source directory, every file/directory inside the source directory except
+		 * the destination directory will be moved to the destination directory. 
+		 */
 		public static function moveDirectory(srcDir:File, destDir:File):void {
+			// sanity checks
+			checkDirectory(srcDir);
 			
+			if(destDir == null) {
+				throw new ArgumentError('Destination directory cannot be null.');
+			}
+			
+			if(!destDir.isDirectory) {
+				throw new ArgumentError('Destination ' + destDir.nativePath + ' is a file and not a directory.');
+			}
+			
+			// in case the destination is a child of source, make sure we move everything else except child
 		}
 		
+		/**
+		 * Move the source file to the destination location.
+		 */
 		public static function moveFile(srcFile:File, destFile:File):void {
+			// sanity checks
+			checkFile(srcFile);
 			
+			if(destFile == null) {
+				throw new ArgumentError('File cannot be null.');
+			}
+			
+			if(!destFile.isDirectory) {
+				throw new ArgumentError('File ' + destFile.name + ' is a file and not directory.');
+			}
+			
+			srcFile.moveTo(destFile, true);
 		}
 		
+		/**
+		 * Move the file to the given destination folder.
+		 */
 		public static function moveFileToDirectory(srcFile:File, destDir:File):void {
+			// sanity checks
+			checkFile(srcFile);
 			
+			if(destDir == null) {
+				throw new ArgumentError('Destination directory cannot be null.');
+			}
+			
+			if(destDir.exists && !destDir.isDirectory) {
+				throw new ArgumentError('File ' + destDir.nativePath + ' is a file and not directory.');
+			}
+			
+			// check if the file's containing folder is same as destination folder
+			if(destDir.exists && srcFile.parent.nativePath == destDir.nativePath) {
+				// do nothing
+				return;
+			}
+			
+			if(!destDir.exists) {
+				destDir.createDirectory();
+			}
+			
+			var targetFile:File = destDir.resolvePath(srcFile.name);
+			
+			moveFile(srcFile, targetFile);
 		}
 		
+		/**
+		 * Rename the source file to the new name.
+		 */
 		public static function renameFile(srcFile:File, newName:String):void {
+			// sanity checks
+			checkFile(srcFile);
 			
+			if(AssertUtils.isEmptyString(newName)) {
+				throw new ArgumentError('New name for the file cannot be empty/null.');
+			}
+			
+			var parentDir:File = srcFile.parent;
+			var targetFile:File = parentDir.resolvePath(newName);
+			
+			if(targetFile.exists && !targetFile.isDirectory) {
+				throw new ArgumentError('A file with target name ' + newName + ' already exists.');
+			}
+			
+			moveFile(srcFile, targetFile);
 		}
 		
 		/**
@@ -320,6 +441,56 @@ package org.myjerry.as3utils {
 			stream.close();
 			
 			return result;
+		}
+		
+		/**
+		 * Write the given data to the file in the given encoding. If no encoding is specified,
+		 * data will be written in the UTF encoding.
+		 */
+		public static function writeStringToFile(file:File, data:String, encoding:String = null):void {
+			if(file == null) {
+				throw new ArgumentError('Target file cannot be null.');
+			}
+			
+			if(file.exists && file.isDirectory) {
+				throw new ArgumentError('Target file is a directory.');
+			}
+			
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			
+			if(encoding == null) {
+				stream.writeUTFBytes(data);
+			} else {
+				stream.writeMultiByte(data, encoding);
+			}
+			
+			IOUtils.closeQuietly(stream);
+		}
+		
+		/**
+		 * Append the given data to the file in the given encoding. If no encoding is specified,
+		 * data will be written in the UTF encoding.
+		 */
+		public static function appendStringToFile(file:File, data:String, encoding:String = null):void {
+			if(file == null) {
+				throw new ArgumentError('Target file cannot be null.');
+			}
+			
+			if(file.exists && file.isDirectory) {
+				throw new ArgumentError('Target file is a directory.');
+			}
+			
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.APPEND);
+			
+			if(encoding == null) {
+				stream.writeUTFBytes(data);
+			} else {
+				stream.writeMultiByte(data, encoding);
+			}
+			
+			IOUtils.closeQuietly(stream);
 		}
 		
 		/**
@@ -355,7 +526,8 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Convenience function to test for directory existence on disk.
+		 * Convenience function to test if the given <code>File</code> object 
+		 * is a valid directory on disk.
 		 */
 		private static function checkDirectory(directory:File):void {
 			if(directory == null) {
@@ -369,6 +541,29 @@ package org.myjerry.as3utils {
 			if(!directory.isDirectory) {
 				throw new ArgumentError('Directory ' + directory.name + ' is not a directory.');
 			}
+		}
+		
+		public static function getFilesWithExtension(directory:File, filter:IFileFilter = null):Array {
+			checkDirectory(directory);
+			
+			var files:Array = directory.getDirectoryListing();
+			
+			if(filter == null) {
+				return files;
+			}
+			
+			if(AssertUtils.isEmptyArray(files)) {
+				return files;
+			}
+			
+			var filtered:Array = new Array();
+			for each(var file:File in files) {
+				if(filter.accept(file)) {
+					filtered.push(file);
+				}
+			}
+			
+			return filtered;
 		}
 	}
 }

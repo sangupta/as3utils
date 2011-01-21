@@ -21,12 +21,14 @@
 
 package org.myjerry.as3utils {
 	
+	import mx.utils.StringUtil;
+	
 	/**
 	 * General string manipulation utilities.
 	 * Modelled around the Apache Commons <code>StringUtils.java</code>.
 	 * 
-	 * @author sangupta
-	 * @since Jan 19, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class StringUtils {
 		
@@ -60,23 +62,71 @@ package org.myjerry.as3utils {
 		}
 		
 		public static function equals(string1:String, string2:String):Boolean {
+			if(string1 == null || string2 == null) {
+				return false;
+			}
+			
+			if(string1.length != string2.length) {
+				return false;
+			}
+			
+			if(string1 == string2) {
+				return true;
+			}
+			
 			return false;
 		}
 		
 		public static function equalsIgnoreCase(string1:String, string2:String):Boolean {
+			if(string1 == null || string2 == null) {
+				return false;
+			}
+			
+			if(string1.length != string2.length) {
+				return false;
+			}
+			
+			string1 = string1.toLowerCase();
+			string2 = string2.toLowerCase();
+			
+			if(string1 == string2) {
+				return true;
+			}
+			
 			return false;
 		}
 		
+		/**
+		 * Get <code>length</code> characters from the given position in the string.
+		 */
 		public static function mid(string:String, position:uint, length:uint):String {
-			return null;
+			if(string == null || string.length == 0) {
+				throw new ArgumentError('Given string is null/empty.');
+			}
+			
+			return string.substr(position, length);
 		}
 		
+		/**
+		 * Get left-most <code>length</code> characters from the string.
+		 */
 		public static function left(string:String, length:uint):String {
-			return null;
+			if(string == null || string.length == 0) {
+				throw new ArgumentError('Given string is null/empty.');
+			}
+			
+			return string.substr(0, length);
 		}
 		
+		/**
+		 * Get right-most <code>length</code> characters from the string.
+		 */
 		public static function right(string:String, length:uint):String {
-			return null;
+			if(string == null || string.length == 0) {
+				throw new ArgumentError('Given string is null/empty.');
+			}
+			
+			return string.substring(string.length - length);
 		}
 		
 		public static function leftTrim(string:String):String {
@@ -88,7 +138,7 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Gets a String's length or 0 if the String is null.
+		 * Gets a String's length or 0 if the String is <code>null</code>.
 		 */
 		public static function length(string:String):uint {
 			if(string == null) {
@@ -99,9 +149,9 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Finds the n-th index within a String, handling null.
+		 * Finds the n-th occurence of searchString within a String, handling <code>null</code>.
 		 */
-		public static function ordinalIndexOf(string:String, searchString:String, ordinal:uint):uint {
+		public static function ordinalIndexOf(string:String, searchString:String, ordinal:uint):int {
 			return 0;
 		}
 		
@@ -139,6 +189,77 @@ package org.myjerry.as3utils {
 		
 		public static function chompString(string:String):String {
 			return null;
+		}
+		
+		/**
+		 * Checks if a given string contains a search String, handling <code>null</code>.
+		 */
+		public static function contains(string:String, searchString:String):Boolean {
+			if(string == null || searchString == null) {
+				return false;
+			}
+			
+			if(string.length == searchString.length == 0) {
+				return true;
+			}
+			
+			if(string.length < searchString.length) {
+				return false;
+			}
+			
+			if(string.indexOf(searchString) != -1) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * Checks if a given string contains a search String, ignoring case, handling <code>null</code>.
+		 */
+		public static function containsIgnoreCase(string:String, searchString:String):Boolean {
+			if(string == null || searchString == null) {
+				return false;
+			}
+			
+			if(string.length == searchString.length == 0) {
+				return true;
+			}
+			
+			if(string.length < searchString.length) {
+				return false;
+			}
+			
+			string = string.toLowerCase();
+			searchString = string.toLowerCase();
+			
+			if(string.indexOf(searchString) != -1) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		public static function getBoolean(boolString:String, defaultValue:Boolean = false):Boolean {
+			if(AssertUtils.isNotEmptyString(boolString)) {
+				boolString = StringUtil.trim(boolString.toLowerCase());
+				if(equals("yes", boolString) || equals("true", boolString)) {
+					return true;
+				}
+				if(equals("no", boolString) || equals("false", boolString)) {
+					return false;
+				}
+				
+			}
+			
+			return defaultValue; 
+		}
+		
+		public static function getNumber(num:String):Number {
+			if(AssertUtils.isEmptyString(num)) {
+				return 0;
+			}
+			return Number(num);
 		}
 	}
 }

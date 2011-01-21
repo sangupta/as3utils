@@ -24,8 +24,8 @@ package org.myjerry.as3utils {
 	/**
 	 * Operations on <code>Boolean</code> values.
 	 * 
-	 * @author sangupta
-	 * @since Jan 19, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class BooleanUtils {
 		

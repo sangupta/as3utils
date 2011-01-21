@@ -28,8 +28,8 @@ package org.myjerry.as3utils {
 	/**
 	 * General assertion utilities.
 	 * 
-	 * @author sangupta
-	 * @since Jan 19, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class AssertUtils {
 		

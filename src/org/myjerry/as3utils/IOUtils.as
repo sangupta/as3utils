@@ -26,8 +26,8 @@ package org.myjerry.as3utils {
 	/**
 	 * Utility functions around I/O.
 	 * 
-	 * @author sangupta
-	 * @since Jan 20, 2011
+	 * @author Sandeep Gupta
+	 * @since 1.0
 	 */
 	public class IOUtils {
 		

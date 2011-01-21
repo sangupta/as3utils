@@ -19,34 +19,28 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter
-{
-	import flash.filesystem.File;
+package org.myjerry.as3utils.filefilter {
 	
+	import flash.filesystem.File;
+
 	/**
-	 * An implementation of <code>FileFilter</code> that selects files matching
-	 * a given file extension.
+	 * An implementation of <code>FileFilter</code> that selects all files
+	 * that are directories.
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class ExtensionFileFilter implements IFileFilter {
+	public class DirectoryFileFilter implements IFileFilter {
 		
-		private var extension:String = null;
-		
-		public function ExtensionFileFilter(extension:String) {
+		/**
+		 * Contructor.
+		 */
+		public function DirectoryFileFilter() {
 			super();
-			
-			if(extension == null) {
-				throw new ArgumentError('Extension cannot be null. Leave empty to match files with no extension.');
-			}
-			
-			this.extension = extension;
 		}
 		
 		public function accept(file:File):Boolean {
-			var ex:String = file.extension;
-			if(this.extension == ex) {
+			if(file.isDirectory) {
 				return true;
 			}
 			
