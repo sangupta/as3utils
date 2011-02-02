@@ -149,5 +149,18 @@ package org.myjerry.as3utils {
 			
 			return false;
 		}
+		
+		/**
+		 * Returns <code>true</code> if the underlying player is a <b>Desktop</b> version
+		 * essentially indicating that we are running on AIR.
+		 */
+		public static function isDesktop():Boolean {
+			var pt:String = Capabilities.playerType;
+			if(pt == "Desktop") {
+				return true;
+			}
+			
+			return false;
+		}
 	}
 }

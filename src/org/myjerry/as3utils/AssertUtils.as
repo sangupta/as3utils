@@ -133,5 +133,6 @@ package org.myjerry.as3utils {
 		public static function isNotEmptyString(string:String):Boolean {
 			return !isEmptyString(string);
 		}
+		
 	}
 }

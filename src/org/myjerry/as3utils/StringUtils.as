@@ -311,27 +311,113 @@ package org.myjerry.as3utils {
 		 * Finds the n-th occurence of searchString within a String, handling <code>null</code>.
 		 */
 		public static function ordinalIndexOf(string:String, searchString:String, ordinal:uint):int {
-			return 0;
+			if(AssertUtils.isEmptyString(string) || (searchString == null)) {
+				return -1;
+			}
+			
+			// if the search string is empty, it will be found at the first character of main string
+			if(AssertUtils.isEmptyString(searchString)) {
+				return 0;
+			}
+			
+			var found:int = 0;
+			var index:int = -1;
+			
+			do {
+				index = string.indexOf(searchString, index + 1);
+				
+				if (index < 0) {
+					return index;
+				}
+				
+				found++;
+			} while (found < ordinal);
+			
+			return index;
 		}
 		
+		/**
+		 * Test if the given string ends in the given suffix, case-sensitively.
+		 */
 		public static function endsWith(string:String, suffix:String):Boolean {
-			return false;
+			if(string == null || suffix == null) {
+				return false;
+			}
+			
+			if(suffix.length > string.length) {
+				return false;
+			}
+			
+			if(suffix.length == string.length) {
+				return string == suffix;
+			}
+			
+			var subString:String = string.substring(string.length - suffix.length);
+			
+			return string == subString;
 		}
 		
+		/**
+		 * Test if the given string ends in the given suffix, case-insensitively.
+		 */
 		public static function endsWithIgnoreCase(string:String, suffix:String):Boolean {
-			return false;
+			if(string == null || suffix == null) {
+				return false;
+			}
+			
+			if(suffix.length > string.length) {
+				return false;
+			}
+			
+			if(suffix.length == string.length) {
+				return equalsIgnoreCase(string, suffix);
+			}
+			
+			var subString:String = string.substring(string.length - suffix.length);
+			
+			return equalsIgnoreCase(subString, suffix);
 		}
 		
+		/**
+		 * Test if the given string starts with the given prefix, case-sensitively.
+		 */
 		public static function startsWith(string:String, prefix:String):Boolean {
-			return false;
+			if(string == null || prefix == null) {
+				return false;
+			}
+			
+			if(prefix.length > string.length) {
+				return false;
+			}
+			
+			if(prefix.length == string.length) {
+				return string == prefix;
+			}
+			
+			var subString:String = string.substr(0, prefix.length);
+			
+			return subString == prefix;
 		}
 		
+		/**
+		 * Test if the given string starts with the given prefix, case-insensitively.
+		 */
 		public static function startsWithIgnoreCase(string:String, prefix:String):Boolean {
-			return false;
-		}
-		
-		public static function swapCase(string:String):String {
-			return null;
+			if(string == null || prefix == null) {
+				return false;
+			}
+			
+			if(prefix.length > string.length) {
+				return false;
+			}
+			
+			if(prefix.length == string.length) {
+				return equalsIgnoreCase(string, prefix);
+			}
+			
+			var subString:String = string.substr(0, prefix.length);
+			
+			return equalsIgnoreCase(subString, prefix);
 		}
 		
 		/**
