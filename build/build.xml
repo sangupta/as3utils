@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="as3utils | myJerry" basedir="./.." default="build">
+<project name="as3utils | myJerry" basedir="./../" default="build">
 
 	<property file="build/build.properties" />
 
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-	
+
 	<tstamp>
 		<format property="BUILD.TIME" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
@@ -32,13 +32,22 @@
 			<arg value="-compiler.external-library-path" />
 			<arg value="${FLEX_HOME}/frameworks/locale/{locale}" />
 		</exec>
+
+		<!--
+		<compc output="${release.dir}/${project.name}1.swc" debug="false" optimize="true">
+			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml" />
+			<source-path path-element="c:/projects/as3utils/src" />
+			<include-sources dir="c:/projects/as3utils/src" includes="*" />
+		</compc>
+		-->
 	</target>
 
 	<target name="clean">
 		<delete dir="${release.dir}" />
 		<mkdir dir="${release.dir}" />
+		<mkdir dir="${report.dir}" />
 	</target>
-	
+
 	<target name="asdocs">
 		<exec executable="${FLEX_HOME}/bin/aasdoc.bat" dir="." failonerror="true" failifexecutionfails="true">
 			<arg line="-doc-sources ${src.dir}" />
@@ -48,6 +57,39 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="clean, compile, asdocs" />
+	<target name="compileTests">
+		<mxmlc file="${test.src.dir}/${test.application.name}.mxml" output="${release.dir}/${test.application.name}.swf">
+			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml" />
+
+			<source-path path-element="${src.dir}" />
+			<source-path path-element="${test.src.dir}" />
+
+			<!-- The TestRunner needs the flexunit libraries in the build/libs folder -->
+			<library-path dir="${build.libs.dir}" append="true">
+				<include name="*.swc" />
+			</library-path>
+
+			<!-- Sets java.awt.headless=true so font compilation works in headless environments -->
+			<compiler.headless-server>true</compiler.headless-server>
+		</mxmlc>
+	</target>
+
+	<target name="runTests">
+		<!-- Run FlexUnit Ant Task to execute the unit tests and capture reporting data -->
+		<taskdef resource="flexUnitTasks.tasks" classpath="${build.libs.dir}/flexUnitTasks-4.0.0.jar" />
+		<flexunit swf="${release.dir}/${test.application.name}.swf" toDir="${report.dir}" haltonfailure="false" verbose="false" localTrusted="false" player="air" />
+
+		<!-- Generate html JUnit-style reports based on test results -->
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.html.dir}" />
+		</junitreport>
+	</target>
+
+	<target name="test" depends="compileTests, runTests" />
+
+	<target name="build" depends="clean, test, compile, asdocs" />
 
 </project>
