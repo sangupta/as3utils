@@ -26,7 +26,7 @@ package org.myjerry.as3utils {
 	/**
 	 * General helper functions to work with platform dependencies.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class SystemUtils {
@@ -35,6 +35,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is any
 		 * variant of the Microsoft Windows operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Microsoft Windows,
+		 * <code>false</code> otherwise.
 		 */  
 		public static function isWindows():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows')) {
@@ -48,6 +51,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is any
 		 * variant of the Apple Macintosh operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Apple Macintosh,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isMac():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'mac os')) {
@@ -60,6 +66,9 @@ package org.myjerry.as3utils {
 		/**
 		 * Returns <code>true</code> if the underlying operating system is any
 		 * variant of the Linux operating system, <code>false</code> otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Linux,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isLinux():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'linux')) {
@@ -73,6 +82,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Microsoft Windows XP operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Microsoft Windows XP,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isWindowsXP():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows xp')) {
@@ -86,6 +98,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Microsoft Windows 7 operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Microsoft Windows 7,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isWindows7():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows 7')) {
@@ -99,6 +114,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Microsoft Windows Vista operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Microsoft Windows Vista,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isWindowsVista():Boolean {
 			if(StringUtils.containsIgnoreCase(Capabilities.os, 'windows vista')) {
@@ -112,6 +130,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Apple Macintosh Tiger (10.4) operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Apple Macintosh Tiger 10.4,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isMacTiger():Boolean {
 			var os:String = Capabilities.os;
@@ -126,6 +147,9 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Apple Macintosh Leopard (10.5) operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Apple Macintosh Tiger 10.5,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isMacLeopard():Boolean {
 			var os:String = Capabilities.os;
@@ -140,10 +164,30 @@ package org.myjerry.as3utils {
 		 * Returns <code>true</code> if the underlying operating system is 
 		 * Apple Macintosh Snow Leopard (10.6) operating system, <code>false</code>
 		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Apple Macintosh Tiger 10.6,
+		 * <code>false</code> otherwise.
 		 */
 		public static function isMacSnowLeopard():Boolean {
 			var os:String = Capabilities.os;
 			if(StringUtils.containsIgnoreCase(os, 'mac os') && os.indexOf('10.6') != -1) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is 
+		 * Apple Macintosh Lion (10.7) operating system, <code>false</code>
+		 * otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying platform is Apple Macintosh Lion 10.7,
+		 * <code>false</code> otherwise.
+		 */
+		public static function isMacLion():Boolean {
+			var os:String = Capabilities.os;
+			if(StringUtils.containsIgnoreCase(os, 'mac os') && os.indexOf('10.7') != -1) {
 				return true;
 			}
 			

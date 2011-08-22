@@ -26,7 +26,7 @@ package org.myjerry.as3utils {
 	/**
 	 * General helper functions to work with objects that interact with WEB.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class WebUtils {

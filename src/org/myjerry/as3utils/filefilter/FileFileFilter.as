@@ -27,7 +27,7 @@ package org.myjerry.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects all files
 	 * that are NOT directories.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class FileFileFilter implements IFileFilter {

@@ -27,7 +27,7 @@ package org.myjerry.as3utils {
 	 * General string manipulation utilities.
 	 * Modelled around the Apache Commons <code>StringUtils.java</code>.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class StringUtils {
@@ -492,9 +492,15 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Convert the given string to a <code>Boolean</code> value. Returns <code>true</code> if the string is
+		 * Convert the given string to a <code>Boolean</code> value.
+		 * 
+		 * @param boolString the string representation of the boolean value.
+		 * 
+		 * @param defaultValue the default value to be used if the string is not a boolean representation 
+		 * 
+		 * @return Returns <code>true</code> if the string is
 		 * any of <code>'yes', 'true', or 'on'</code>. Returns <code>false</code> if the string is any of <code>
-		 * 'no', 'false', or 'off'</code>. Returns the mentioned default value if the string is <code>null</code>,
+		 * 'no', 'false', or 'off'</code>. Returns the supplied default value if the string is <code>null</code>,
 		 * empty or any other given string. 
 		 */
 		public static function getBoolean(boolString:String, defaultValue:Boolean = false):Boolean {
@@ -514,7 +520,13 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Convert the given string to a <code>Number</code>. Returns ZERO if the string is <code>null</code>, or empty.
+		 * Convert the given string to a <code>Number</code>. 
+		 * Returns ZERO if the string is <code>null</code>, or empty.
+		 * 
+		 * @param number the string to be converted into the <code>Number</code>
+		 * 
+		 * @return returns the number representation of the string. Returns <code>ZERO</code>
+		 * if the string is <code>null</code> or empty.
 		 */
 		public static function getNumber(number:String):Number {
 			if(AssertUtils.isEmptyString(number)) {

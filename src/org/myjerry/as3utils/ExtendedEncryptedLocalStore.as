@@ -25,11 +25,11 @@ package org.myjerry.as3utils {
 	import flash.utils.ByteArray;
 
 	/**
-	 * An extension of the original EncryptedLocalStore class to provide for convenience
+	 * An extension of the original <code>EncryptedLocalStore</code> class to provide for convenience
 	 * methods to work with various basic data types like String, Int, Float, Double, etc
 	 * to remove boiler plate code.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class ExtendedEncryptedLocalStore extends EncryptedLocalStore {
@@ -44,28 +44,81 @@ package org.myjerry.as3utils {
 		// Original methods from the class are listed below
 		// this is so because in ActionScript static methods are not inherited
 		
+		/**
+		 * [Read Only] The isSupported property is set to <code>true</code> 
+		 * if the <code>EncryptedLocalStore</code> class is supported on the 
+		 * current platform, otherwise it is set to <code>false</code>.
+		 * (Copied verbatim from <code>EncryptedLocalStore.setItem</code>)
+		 */
 		public static function get isSupported():Boolean {
 			return EncryptedLocalStore.isSupported;
 		}
 		
+		/**
+		 * The data corresponding to the specified name. If an item does not exist 
+		 * by the specified name, this method returns <code>null</code>.
+		 * (Copied verbatim from <code>EncryptedLocalStore.setItem</code>)
+		 * 
+		 * @param name The name of the item in the encrypted local store.
+		 * 
+		 * @return The ByteArray data. If there is no data for the provided name, the method returns <code>null</code>.
+		 * 
+		 * @throws ArgumentError The name value is null or an empty string.
+		 */
 		public static function getItem(name:String):ByteArray {
 			return EncryptedLocalStore.getItem(name);
 		}
 		
+		/**
+		 * Stores a ByteArray object under the specified name. 
+		 * (Copied verbatim from <code>EncryptedLocalStore.setItem</code>)
+		 * 
+		 * @param name The name of the item in the encrypted local store 
+		 * 
+		 * @param data The data.
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 * 
+		 * @throws ArgumentError The name value is null or an empty string.
+		 */
 		public static function setItem(name:String, data:ByteArray, stronglyBound:Boolean = false):void {
 			EncryptedLocalStore.setItem(name, data, stronglyBound);
 		}
 		
+		/**
+		 * Removes the item with the given name from the encrypted local store.
+		 * (Copied verbatim from <code>EncryptedLocalStore.setItem</code>)
+		 * 
+		 * @param name The name of the item in the encrypted local store.
+		 * 
+		 * @throws ArgumentError The name value is null or an empty string.
+		 */
 		public static function removeItem(name:String):void {
 			EncryptedLocalStore.removeItem(name);
 		}
 		
+		/**
+		 * [Inherited] Clears the entire encrypted local store, deleting all data.
+		 * (Copied verbatim from <code>EncryptedLocalStore.setItem</code>)
+		 */
 		public static function reset():void {
 			EncryptedLocalStore.reset();
 		}
 		
 		// Convenience methods start from here
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setStringItem(name:String, data:String, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeUTFBytes(data);
@@ -81,6 +134,14 @@ package org.myjerry.as3utils {
 			return byteArray.readUTFBytes(byteArray.length);
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setUnsignedIntItem(name:String, data:uint, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeUnsignedInt(data);
@@ -96,6 +157,14 @@ package org.myjerry.as3utils {
 			return 0;
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setBoolean(name:String, data:Boolean, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeBoolean(data);
@@ -111,6 +180,14 @@ package org.myjerry.as3utils {
 			return byteArray.readBoolean();
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setDouble(name:String, data:Number, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeDouble(data);
@@ -126,6 +203,14 @@ package org.myjerry.as3utils {
 			return byteArray.readDouble();
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setFloat(name:String, data:Number, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeFloat(data);
@@ -141,6 +226,14 @@ package org.myjerry.as3utils {
 			return byteArray.readFloat();
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setInt(name:String, data:int, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeInt(data);
@@ -156,12 +249,20 @@ package org.myjerry.as3utils {
 			return byteArray.readInt();
 		}
 		
+		/**
+		 * 
+		 * @param stronglyBound (deprecated) The <code>stronglyBound</code> parameter should be set to 
+		 * <code>false</code> (the default value). If set to <code>true</code>, the stored item cannot be 
+		 * retrieved if any application files are altered. For example,if a user installs an update of your 
+		 * application, the updated application cannot read any strongly bound data that was previously 
+		 * written to the encrypted local store.
+		 */
 		public static function setByte(name:String, data:int, stronglyBound:Boolean = false):void {
 			var byteArray:ByteArray = new ByteArray();
 			byteArray.writeByte(data);
 			EncryptedLocalStore.setItem(name, byteArray, stronglyBound);
 		}
-		
+
 		public static function getByte(name:String):int {
 			var byteArray:ByteArray = EncryptedLocalStore.getItem(name);
 			if(byteArray == null) {

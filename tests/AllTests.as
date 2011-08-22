@@ -26,7 +26,7 @@ package {
 	
 	/**
 	 *
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	[Suite]

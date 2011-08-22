@@ -24,8 +24,10 @@ package org.myjerry.as3utils {
 	import flash.filesystem.File;
 	
 	/**
+	 * Utility class to convert data streams into <code>XML</code> objects,
+	 * operations surrounding the same and others.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class XMLUtils {
@@ -40,6 +42,10 @@ package org.myjerry.as3utils {
 		/**
 		 * Reads the contents of the file at the specified path and
 		 * returns an <code>XML</code> object of it.
+		 * 
+		 * @param path the absolute location of the file to be read
+		 * 
+		 * @return returns the <code>XML</code> object as parsed from the file contents
 		 */ 
 		public static function readFilePathToXML(path:String):XML {
 			var contents:String = FileUtils.readFileToString(new File(path));
@@ -51,6 +57,10 @@ package org.myjerry.as3utils {
 		/**
 		 * Reads the contents of the given <code>File</code> and returns
 		 * an <code>XML</code> object of it.
+		 * 
+		 * @param file the <code>File</code> object from where the contents are read
+		 * 
+		 * @return returns the <code>XML</code> object as parsed from the file contents
 		 */
 		public static function readFileToXML(file:File):XML {
 			var contents:String = FileUtils.readFileToString(file);

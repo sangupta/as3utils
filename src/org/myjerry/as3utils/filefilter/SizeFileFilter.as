@@ -28,7 +28,7 @@ package org.myjerry.as3utils.filefilter {
 	 * based on a given cutoff size. Can filter either files smalled or 
 	 * larger in size (cutoff included in both cases). 
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class SizeFileFilter implements IFileFilter {

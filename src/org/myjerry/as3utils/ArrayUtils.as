@@ -24,7 +24,7 @@ package org.myjerry.as3utils {
 	/**
 	 * Helper class for working with <code>Array</code> class.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class ArrayUtils	{

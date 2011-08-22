@@ -24,7 +24,7 @@ package org.myjerry.as3utils {
 	/**
 	 * Utiltiy functions around the <code>Date</code> objects.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class DateUtils {

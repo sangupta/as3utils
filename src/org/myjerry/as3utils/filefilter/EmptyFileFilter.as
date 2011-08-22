@@ -28,7 +28,7 @@ package org.myjerry.as3utils.filefilter {
 	 * that are emtpy in size. Will filter out any directories passed to the
 	 * filter. 
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class EmptyFileFilter implements IFileFilter {

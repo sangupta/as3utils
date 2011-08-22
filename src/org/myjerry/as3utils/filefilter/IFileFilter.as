@@ -27,7 +27,7 @@ package org.myjerry.as3utils.filefilter {
 	 * Contract for implementing classes used to filter out specific files/directories
 	 * from a given set of files.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public interface IFileFilter {

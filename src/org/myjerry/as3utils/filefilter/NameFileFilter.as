@@ -27,7 +27,7 @@ package org.myjerry.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects all files
 	 * that match the given name irrespective of the extension.
 	 * 
-	 * @author Sandeep Gupta
+	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
 	public class NameFileFilter implements IFileFilter {
