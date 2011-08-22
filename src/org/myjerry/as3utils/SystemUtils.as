@@ -21,10 +21,13 @@
 
 package org.myjerry.as3utils {
 	
+	import flash.filesystem.File;
 	import flash.system.Capabilities;
 	
 	/**
 	 * General helper functions to work with platform dependencies.
+	 * The values returned by the methods are not cached internally and is left
+	 * to the using application to cache as appropriate.
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
@@ -197,11 +200,41 @@ package org.myjerry.as3utils {
 		/**
 		 * Returns <code>true</code> if the underlying player is a <b>Desktop</b> version
 		 * essentially indicating that we are running on AIR.
+		 * 
+		 * @return <code>true</code> if the machine running is Desktop grade.
 		 */
 		public static function isDesktop():Boolean {
 			var pt:String = Capabilities.playerType;
 			if(pt == "Desktop") {
 				return true;
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * Returns <code>true</code> if the underlying operating systems is a
+		 * Debian based linux version, <code>false</code> otherwise.
+		 */ 
+		public static function isLinuxDebian():Boolean {
+			if(isLinux()) {
+				if ((new File("/usr/bin/dpkg")).exists) {
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
+		/**
+		 * Returns <code>true</code> if the underlying operating system is a
+		 * RedHat (RPM) linux version, <code>false</code> otherwise.
+		 */ 
+		public static function isLinuxRedHat():Boolean {
+			if(isLinux()) {
+				if (!((new File("/usr/bin/dpkg")).exists)) {
+					return true;
+				}
 			}
 			
 			return false;
