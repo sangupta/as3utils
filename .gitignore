@@ -1,7 +1,27 @@
-# Remove MAC specific files
-.DS_Store
+#### `.gitignore`
 
-# Flash Builder build directories
-bin/
-bin-debug/
-bin-release/
+# SVN directories
+.svn
+
+# OSX noise
+.DS_Store
+*.pbxuser
+profile
+
+# Flash Builder noise
+.actionScriptProperties
+.flexProperties
+.project
+.settings
+bin/*
+bin-debug/*
+report/*
+bin-test/*
+docs/*
+.flexLibProperties
+
+# Java noise
+*.class
+
+# Windows noise
+desktop.ini
