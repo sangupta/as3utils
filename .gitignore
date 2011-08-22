@@ -1,0 +1,7 @@
+# Remove MAC specific files
+.DS_Store
+
+# Flash Builder build directories
+bin/
+bin-debug/
+bin-release/

@@ -39,7 +39,7 @@ package org.myjerry.as3utils {
 		}
 		
 		/**
-		 * Returns the value of a given HTTP Header from the list of supplied header values.
+		 * Returns the value of a given HTTP Header as String from the list of supplied header values.
 		 */
 		public static function getHeader(headers:Array, headerName:String):String {
 			if(AssertUtils.isEmptyArray(headers)) {
