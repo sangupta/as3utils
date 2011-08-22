@@ -22,16 +22,17 @@
 package org.myjerry.as3utils {
 	
 	/**
+	 * Helper class for working with <code>Array</code> class.
 	 * 
 	 * @author Sandeep Gupta
 	 * @since 1.0
 	 */
-	public class Arrayutils	{
+	public class ArrayUtils	{
 		
 		/**
 		 * <code>Arrayutils</code> instances should NOT be constructed in standard programming.
 		 */
-		public function Arrayutils() {
+		public function ArrayUtils() {
 			super();
 		}
 
@@ -39,7 +40,7 @@ package org.myjerry.as3utils {
 		 * Method that checks whether the given <code>object</code> is present
 		 * in the array using strict === equality.
 		 */
-		public function has(array:Array, object:Object):Boolean {
+		public static function has(array:Array, object:Object):Boolean {
 			if(array == null || object == null) {
 				return false;
 			}
@@ -57,7 +58,7 @@ package org.myjerry.as3utils {
 		 * Method that checks whether the given <code>object</code> is present
 		 * in the array using normal == equality.
 		 */
-		public function contains(array:Array, object:Object):Boolean {
+		public static function contains(array:Array, object:Object):Boolean {
 			if(array == null || object == null) {
 				return false;
 			}
@@ -70,5 +71,23 @@ package org.myjerry.as3utils {
 			
 			return false;
 		}
+		
+		/**
+		 * Remove the given item from the array
+		 */
+		public static function removeItem(array:Array, object:Object):void {
+			if(object != null) {
+				if(AssertUtils.isNotEmptyArray(array)) {
+					for(var index:Number = 0; index < array.length; index++) {
+						var item:Object = array[index];
+						if(item === object) {
+							array.splice(index, 1);
+							break;
+						}
+					}
+				}
+			}
+		}
+
 	}
 }
