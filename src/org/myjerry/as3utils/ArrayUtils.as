@@ -88,6 +88,12 @@ package org.myjerry.as3utils {
 				}
 			}
 		}
+		
+		public static function clear(array:Array):void {
+			if(array != null) {
+				array.splice(0, array.length);
+			}
+		}
 
 	}
 }
