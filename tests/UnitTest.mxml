@@ -36,7 +36,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import org.flexunit.listeners.CIListener;
+			import org.flexunit.listeners.AirCIListener;
 			import org.flexunit.listeners.UIListener;
 			import org.flexunit.runner.FlexUnitCore;
 			
@@ -50,7 +50,7 @@
 				core.addListener(new UIListener(this.uiListener));
 				
 				// Listener to support continuous integration servers
-				core.addListener(new CIListener());
+				core.addListener(new AirCIListener());
 				
 				core.run(AllTests);
 			}
