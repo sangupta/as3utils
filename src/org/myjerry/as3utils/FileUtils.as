@@ -26,6 +26,7 @@ package org.myjerry.as3utils {
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.net.FileFilter;
+	import flash.utils.ByteArray;
 	
 	import org.myjerry.as3utils.filefilter.IFileFilter;
 	
@@ -568,6 +569,62 @@ package org.myjerry.as3utils {
 			}
 			
 			return filtered;
+		}
+		
+		/**
+		 * Returns <code>true</code> if the given file is not a directory, packages (MacOS), or a symbolic link.
+		 */
+		public static function isFile(file:File):Boolean {
+			checkFile(file);
+			
+			if(file.isDirectory || file.isPackage || file.isSymbolicLink) {
+				return false;
+			}
+			
+			return true;
+		}
+		
+		/**
+		 * Reads the given file into a <code>ByteArray</code> object.
+		 * 
+		 * @param file the file to be read
+		 * 
+		 * @return the <code>ByteArray</code> object, or <code>null</code> if file does not exists.
+		 * 
+		 * @throws ArgumentError if the file is <code>null</code> object.
+		 */
+		public static function readFileToByteArray(file:File):ByteArray {
+			checkFile(file);
+			
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.READ);
+			
+			var byteArray:ByteArray = new ByteArray();
+			stream.readBytes(byteArray, 0, file.size);
+			
+			IOUtils.closeQuietly(stream);
+			
+			return byteArray;
+		}
+		
+		/**
+		 * Write the given byte array to the file.
+		 */
+		public static function writeByteArrayToFile(file:File, data:ByteArray):void {
+			if(file == null) {
+				throw new ArgumentError('Target file cannot be null.');
+			}
+			
+			if(file.exists && file.isDirectory) {
+				throw new ArgumentError('Target file is a directory.');
+			}
+			
+			var stream:FileStream = new FileStream();
+			stream.open(file, FileMode.WRITE);
+			
+			stream.writeBytes(data, 0, data.length);
+			
+			IOUtils.closeQuietly(stream);
 		}
 	}
 }
