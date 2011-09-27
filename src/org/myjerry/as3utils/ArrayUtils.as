@@ -30,7 +30,7 @@ package org.myjerry.as3utils {
 	public class ArrayUtils	{
 		
 		/**
-		 * <code>Arrayutils</code> instances should NOT be constructed in standard programming.
+		 * <code>ArrayUtils</code> instances should NOT be constructed in standard programming.
 		 */
 		public function ArrayUtils() {
 			super();
@@ -89,6 +89,9 @@ package org.myjerry.as3utils {
 			}
 		}
 		
+		/**
+		 * Remove all elements from the given array.
+		 */
 		public static function clear(array:Array):void {
 			if(array != null) {
 				array.splice(0, array.length);

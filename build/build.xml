@@ -51,6 +51,7 @@
 	<target name="asdocs">
 		<exec executable="${FLEX_HOME}/bin/aasdoc.bat" dir="." failonerror="true" failifexecutionfails="true">
 			<arg line="-doc-sources ${src.dir}" />
+			<arg line="-package-description-file=build/packageDescription.xml" />
 			<arg line="-source-path ${src.dir}" />
 			<arg line="-output ${release.dir}/docs" />
 			<arg line="-window-title &quot;${doc.window.title}&quot;" />
