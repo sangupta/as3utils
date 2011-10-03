@@ -47,6 +47,14 @@ package org.myjerry.as3utils.filefilter {
 			this.name = name;
 		}
 		
+		/**
+		 * Test whether the supplied file fulfills the criteria of this filter.
+		 * 
+		 * @param the file to be tested against
+		 * 
+		 * @return <code>true</code> if the file can be accepted by the filter,
+		 * <code>false</code> otherwise.
+		 */
 		public function accept(file:File):Boolean {
 			var n:String = file.name.substr(0, file.name.length - file.extension.length - 1);
 			if(this.name == n) {

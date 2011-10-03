@@ -39,6 +39,14 @@ package org.myjerry.as3utils.filefilter {
 			super();
 		}
 		
+		/**
+		 * Test whether the supplied file fulfills the criteria of this filter.
+		 * 
+		 * @param the file to be tested against
+		 * 
+		 * @return <code>true</code> if the file can be accepted by the filter,
+		 * <code>false</code> otherwise.
+		 */
 		public function accept(file:File):Boolean {
 			if(file.isDirectory) {
 				return true;

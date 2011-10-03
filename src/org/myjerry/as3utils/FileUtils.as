@@ -25,7 +25,6 @@ package org.myjerry.as3utils {
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
-	import flash.net.FileFilter;
 	import flash.utils.ByteArray;
 	
 	import org.myjerry.as3utils.filefilter.IFileFilter;
@@ -626,5 +625,21 @@ package org.myjerry.as3utils {
 			
 			IOUtils.closeQuietly(stream);
 		}
+		
+		public static function folderContainsFile(folder:File, filename:String):Boolean {
+			if(folder == null || !folder.exists) {
+				return false;
+			}
+			
+			var filePath:String = folder.nativePath + File.separator + filename;
+			var file:File = new File(filePath);
+			
+			if(file.exists) {
+				return true;
+			}
+			
+			return false;
+		}
+		
 	}
 }
