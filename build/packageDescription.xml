@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<overviews>
+	<packages>
+		<package name="org.myjerry.as3utils">
+			<shortDescription>
+				Contains the various utility classes.
+			</shortDescription>
+			<description>
+				Contains the various utility classes.
+			</description>
+		</package>
+		<package name="org.myjerry.as3utils.filefilter">
+			<shortDescription>
+			<![CDATA[
+				Common implementations for the &lt;code&gt;IFileFilter&lt;/code&gt; interface
+			]]> 
+			</shortDescription>
+		</package>
+	</packages>
+</overviews>
