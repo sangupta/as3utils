@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,23 +19,24 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter {
+package com.sangupta.as3utils.filefilter {
 	
 	import flash.filesystem.File;
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that are directories.
+	 * that are emtpy in size. Will filter out any directories passed to the
+	 * filter. 
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public class DirectoryFileFilter implements IFileFilter {
+	public class EmptyFileFilter implements IFileFilter {
 		
 		/**
 		 * Contructor.
 		 */
-		public function DirectoryFileFilter() {
+		public function EmptyFileFilter() {
 			super();
 		}
 		
@@ -48,7 +49,7 @@ package org.myjerry.as3utils.filefilter {
 		 * <code>false</code> otherwise.
 		 */
 		public function accept(file:File):Boolean {
-			if(file.isDirectory) {
+			if(file.size == 0 && !file.isDirectory) {
 				return true;
 			}
 			

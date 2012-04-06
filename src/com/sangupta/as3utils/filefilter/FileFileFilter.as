@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,35 +19,24 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter {
+package com.sangupta.as3utils.filefilter {
 	
 	import flash.filesystem.File;
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * based on a cutoff time. Can filter either newer files or older (cutoff 
-	 * included in both cases). 
+	 * that are NOT directories.
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public class AgeFileFilter implements IFileFilter {
-		
-		private var cutoff:Number = 0;
-		
-		private var older:Boolean = false;
+	public class FileFileFilter implements IFileFilter {
 		
 		/**
 		 * Contructor.
 		 */
-		public function AgeFileFilter(date:Date, older:Boolean = false) {
+		public function FileFileFilter() {
 			super();
-			
-			if(date == null) {
-				throw new ArgumentError('Date cannot be null.');
-			}
-			
-			this.cutoff = date.time;
 		}
 		
 		/**
@@ -59,11 +48,11 @@ package org.myjerry.as3utils.filefilter {
 		 * <code>false</code> otherwise.
 		 */
 		public function accept(file:File):Boolean {
-			if(older) {
-				return file.modificationDate.time <= cutoff;
+			if(file.isDirectory) {
+				return false;
 			}
 			
-			return file.modificationDate.time >= cutoff;
+			return true;
 		}
 	}
 }

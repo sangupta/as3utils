@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,27 +19,40 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter {
+package com.sangupta.as3utils.filefilter {
 	
 	import flash.filesystem.File;
 
 	/**
-	 * Contract for implementing classes used to filter out specific files/directories
-	 * from a given set of files.
+	 * An implementation of <code>FileFilter</code> that selects all files
+	 * that are directories.
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public interface IFileFilter {
-	
+	public class DirectoryFileFilter implements IFileFilter {
+		
 		/**
-		 * Function that takes in a file object and returns <code>true</code>
-		 * if the file should be accepted in the filtered list, <code>false</code>
-		 * otherwise.
-		 * 
-		 * Implementations will never receive a <code>null</code> argument to this
-		 * method.
+		 * Contructor.
 		 */
-		function accept(file:File):Boolean;
+		public function DirectoryFileFilter() {
+			super();
+		}
+		
+		/**
+		 * Test whether the supplied file fulfills the criteria of this filter.
+		 * 
+		 * @param the file to be tested against
+		 * 
+		 * @return <code>true</code> if the file can be accepted by the filter,
+		 * <code>false</code> otherwise.
+		 */
+		public function accept(file:File):Boolean {
+			if(file.isDirectory) {
+				return true;
+			}
+			
+			return false;
+		}
 	}
 }

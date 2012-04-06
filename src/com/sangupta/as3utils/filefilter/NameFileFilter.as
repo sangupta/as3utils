@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,29 +19,32 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter
-{
-	import flash.filesystem.File;
+package com.sangupta.as3utils.filefilter {
 	
+	import flash.filesystem.File;
+
 	/**
-	 * An implementation of <code>FileFilter</code> that selects files matching
-	 * a given file extension.
+	 * An implementation of <code>FileFilter</code> that selects all files
+	 * that match the given name irrespective of the extension.
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public class ExtensionFileFilter implements IFileFilter {
+	public class NameFileFilter implements IFileFilter {
 		
-		private var extension:String = null;
+		private var name:String = null;
 		
-		public function ExtensionFileFilter(extension:String) {
+		/**
+		 * Contructor.
+		 */
+		public function NameFileFilter(name:String) {
 			super();
 			
-			if(extension == null) {
-				throw new ArgumentError('Extension cannot be null. Leave empty to match files with no extension.');
+			if(name == null) {
+				throw new ArgumentError('Name cannot be null. To match files that do not have a name, leave it blank.');
 			}
 			
-			this.extension = extension;
+			this.name = name;
 		}
 		
 		/**
@@ -53,8 +56,8 @@ package org.myjerry.as3utils.filefilter
 		 * <code>false</code> otherwise.
 		 */
 		public function accept(file:File):Boolean {
-			var ex:String = file.extension;
-			if(this.extension == ex) {
+			var n:String = file.name.substr(0, file.name.length - file.extension.length - 1);
+			if(this.name == n) {
 				return true;
 			}
 			

@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,28 +19,35 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter {
+package com.sangupta.as3utils.filefilter {
 	
 	import flash.filesystem.File;
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that are either hidden or not.
+	 * based on a given cutoff size. Can filter either files smalled or 
+	 * larger in size (cutoff included in both cases). 
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public class HiddenFileFilter implements IFileFilter {
+	public class SizeFileFilter implements IFileFilter {
 		
-		private var hidden:Boolean;
+		private var size:Number = 0;
+		
+		private var larger:Boolean = false;
 		
 		/**
 		 * Contructor.
 		 */
-		public function HiddenFileFilter(hidden:Boolean = true) {
+		public function SizeFileFilter(size:uint, larger:Boolean = false) {
 			super();
 			
-			this.hidden = hidden;
+			if(size == 0) {
+				throw new ArgumentError('Use EmptyFileFilter to filter out empty sized files.');
+			}
+			
+			this.size = size;
 		}
 		
 		/**
@@ -52,11 +59,11 @@ package org.myjerry.as3utils.filefilter {
 		 * <code>false</code> otherwise.
 		 */
 		public function accept(file:File):Boolean {
-			if(file.isHidden == hidden) {
-				return true;
+			if(larger) {
+				return file.size >= this.size;
 			}
 			
-			return false;
+			return file.size <= this.size;
 		}
 	}
 }

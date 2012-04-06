@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,32 +19,28 @@
  *
  */
 
-package org.myjerry.as3utils.filefilter {
+package com.sangupta.as3utils.filefilter {
 	
 	import flash.filesystem.File;
 
 	/**
 	 * An implementation of <code>FileFilter</code> that selects all files
-	 * that match the given name irrespective of the extension.
+	 * that are either hidden or not.
 	 * 
 	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
 	 * @since 1.0
 	 */
-	public class NameFileFilter implements IFileFilter {
+	public class HiddenFileFilter implements IFileFilter {
 		
-		private var name:String = null;
+		private var hidden:Boolean;
 		
 		/**
 		 * Contructor.
 		 */
-		public function NameFileFilter(name:String) {
+		public function HiddenFileFilter(hidden:Boolean = true) {
 			super();
 			
-			if(name == null) {
-				throw new ArgumentError('Name cannot be null. To match files that do not have a name, leave it blank.');
-			}
-			
-			this.name = name;
+			this.hidden = hidden;
 		}
 		
 		/**
@@ -56,8 +52,7 @@ package org.myjerry.as3utils.filefilter {
 		 * <code>false</code> otherwise.
 		 */
 		public function accept(file:File):Boolean {
-			var n:String = file.name.substr(0, file.name.length - file.extension.length - 1);
-			if(this.name == n) {
+			if(file.isHidden == hidden) {
 				return true;
 			}
 			

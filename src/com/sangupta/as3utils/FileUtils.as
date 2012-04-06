@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,15 +19,15 @@
  *
  */
 
-package org.myjerry.as3utils {
+package com.sangupta.as3utils {
+	
+	import com.sangupta.as3utils.filefilter.IFileFilter;
 	
 	import flash.errors.IOError;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
 	import flash.utils.ByteArray;
-	
-	import org.myjerry.as3utils.filefilter.IFileFilter;
 	
 	/**
 	 * General file manipulation utilities.

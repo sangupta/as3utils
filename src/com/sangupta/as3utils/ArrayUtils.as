@@ -1,8 +1,8 @@
 /**
  *
  * as3utils - ActionScript Utility Classes
- * Copyright (C) 2011, myJerry Developers
- * http://www.myjerry.org/as3utils
+ * Copyright (C) 2011, Sandeep Gupta
+ * http://www.sangupta.com/projects/as3utils
  *
  * The file is licensed under the the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
@@ -19,7 +19,7 @@
  *
  */
 
-package org.myjerry.as3utils {
+package com.sangupta.as3utils {
 	
 	/**
 	 * Helper class for working with <code>Array</code> class.
