@@ -27,7 +27,7 @@ package com.sangupta.as3utils.filefilter {
 	 * Contract for implementing classes used to filter out specific files/directories
 	 * from a given set of files.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public interface IFileFilter {
@@ -39,6 +39,8 @@ package com.sangupta.as3utils.filefilter {
 		 * 
 		 * Implementations will never receive a <code>null</code> argument to this
 		 * method.
+		 * 
+		 * @param file the file that needs to be tested against the chosen filter
 		 */
 		function accept(file:File):Boolean;
 	}

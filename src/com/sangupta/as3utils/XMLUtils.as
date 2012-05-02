@@ -27,7 +27,7 @@ package com.sangupta.as3utils {
 	 * Utility class to convert data streams into <code>XML</code> objects,
 	 * operations surrounding the same and others.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class XMLUtils {

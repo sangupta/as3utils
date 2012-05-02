@@ -27,13 +27,18 @@ package com.sangupta.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects files matching
 	 * a given file extension.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class ExtensionFileFilter implements IFileFilter {
 		
 		private var extension:String = null;
 		
+		/**
+		 * Create a new instance of <code>ExtensionFileFilter</code>.
+		 * 
+		 * @param extension the file extension to match against.
+		 */
 		public function ExtensionFileFilter(extension:String) {
 			super();
 			

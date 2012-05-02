@@ -26,7 +26,7 @@ package com.sangupta.as3utils {
 	/**
 	 * General helper functions to work with objects that interact with WEB.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class WebUtils {

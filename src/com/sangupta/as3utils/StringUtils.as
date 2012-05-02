@@ -27,7 +27,7 @@ package com.sangupta.as3utils {
 	 * General string manipulation utilities.
 	 * Modelled around the Apache Commons <code>StringUtils.java</code>.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class StringUtils {

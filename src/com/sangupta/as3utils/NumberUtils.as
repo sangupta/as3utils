@@ -24,7 +24,7 @@ package com.sangupta.as3utils {
 	/**
 	 * Modelled around the Apache Commons <code>MathUtils.java</code>.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class NumberUtils {

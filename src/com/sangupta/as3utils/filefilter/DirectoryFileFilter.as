@@ -27,13 +27,14 @@ package com.sangupta.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects all files
 	 * that are directories.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class DirectoryFileFilter implements IFileFilter {
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of <code>DirectoryFileFilter</code>.
+		 * 
 		 */
 		public function DirectoryFileFilter() {
 			super();

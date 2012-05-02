@@ -32,7 +32,7 @@ package com.sangupta.as3utils {
 	/**
 	 * General file manipulation utilities.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class FileUtils {
@@ -61,6 +61,12 @@ package com.sangupta.as3utils {
 		
 		/**
 		 * Delete a given file or directory (and all its sub-directories).
+		 * 
+		 * @param file the file or directory to be deleted, should exist on disk and not be <code>null</code>
+		 *
+		 * @throws ArgumentError if the file/directory is null
+		 * 
+		 * @throws ArgumentError if the file/directory does not exist on disk 
 		 */
 		public static function forceDelete(file:File):void {
 			// sanity checks
@@ -626,6 +632,16 @@ package com.sangupta.as3utils {
 			IOUtils.closeQuietly(stream);
 		}
 		
+		/**
+		 * Tests if the specified folder contains a file with the given filename
+		 * 
+		 * @param folder the directory in which to check for file
+		 * 
+		 * @param filename the name of the file to look for
+		 * 
+		 * @return <code>true</code> if the file exists, <code>false</code> if the folder is null, or does 
+		 * not exists, or the file does not exists in folder
+		 */ 
 		public static function folderContainsFile(folder:File, filename:String):Boolean {
 			if(folder == null || !folder.exists) {
 				return false;

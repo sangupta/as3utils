@@ -28,7 +28,7 @@ package com.sangupta.as3utils.filefilter {
 	 * based on a given cutoff size. Can filter either files smalled or 
 	 * larger in size (cutoff included in both cases). 
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class SizeFileFilter implements IFileFilter {
@@ -38,7 +38,13 @@ package com.sangupta.as3utils.filefilter {
 		private var larger:Boolean = false;
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of the <code>SizeFileFilter</code>.
+		 * 
+		 * @param size the value of the size to match
+		 * 
+		 * @param larger value of <code>true</code> signifies if files equal or larger in
+		 * size are selected. A value of <code>false</code> signifies if files equal or
+		 * smaller in size are selected.
 		 */
 		public function SizeFileFilter(size:uint, larger:Boolean = false) {
 			super();

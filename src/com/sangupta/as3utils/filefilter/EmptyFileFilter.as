@@ -28,13 +28,14 @@ package com.sangupta.as3utils.filefilter {
 	 * that are emtpy in size. Will filter out any directories passed to the
 	 * filter. 
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class EmptyFileFilter implements IFileFilter {
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of <code>EmptyFileFilter</code>.
+		 * 
 		 */
 		public function EmptyFileFilter() {
 			super();

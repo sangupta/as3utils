@@ -26,7 +26,7 @@ package com.sangupta.as3utils {
 	/**
 	 * Utility functions around I/O.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class IOUtils {

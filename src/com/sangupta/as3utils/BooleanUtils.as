@@ -24,7 +24,7 @@ package com.sangupta.as3utils {
 	/**
 	 * Operations on <code>Boolean</code> values.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class BooleanUtils {
@@ -68,6 +68,10 @@ package com.sangupta.as3utils {
 		
 		/**
 		 * Return the opposite of the given <code>Boolean</code>.
+		 * 
+		 * @param bool the boolean to negate
+		 * 
+		 * @return returns the inverse of the supplied boolean
 		 */
 		public static function negate(bool:Boolean):Boolean {
 			return !bool;

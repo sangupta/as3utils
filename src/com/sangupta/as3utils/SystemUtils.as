@@ -29,7 +29,7 @@ package com.sangupta.as3utils {
 	 * The values returned by the methods are not cached internally and is left
 	 * to the using application to cache as appropriate.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class SystemUtils {
@@ -215,6 +215,9 @@ package com.sangupta.as3utils {
 		/**
 		 * Returns <code>true</code> if the underlying operating systems is a
 		 * Debian based linux version, <code>false</code> otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying operating system is
+		 * <b>Debian Linux</b>, <code>false</code> otherwise.
 		 */ 
 		public static function isLinuxDebian():Boolean {
 			if(isLinux()) {
@@ -229,6 +232,9 @@ package com.sangupta.as3utils {
 		/**
 		 * Returns <code>true</code> if the underlying operating system is a
 		 * RedHat (RPM) linux version, <code>false</code> otherwise.
+		 * 
+		 * @return <code>true</code> if the underlying operating system is
+		 * <b>RedHat Linux</b>, <code>false</code> otherwise.
 		 */ 
 		public static function isLinuxRedHat():Boolean {
 			if(isLinux()) {

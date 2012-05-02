@@ -29,7 +29,7 @@ package com.sangupta.as3utils {
 	 * methods to work with various basic data types like String, Int, Float, Double, etc
 	 * to remove boiler plate code.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class ExtendedEncryptedLocalStore extends EncryptedLocalStore {

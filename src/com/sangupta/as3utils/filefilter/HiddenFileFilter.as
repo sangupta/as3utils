@@ -27,7 +27,7 @@ package com.sangupta.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects all files
 	 * that are either hidden or not.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class HiddenFileFilter implements IFileFilter {
@@ -35,7 +35,10 @@ package com.sangupta.as3utils.filefilter {
 		private var hidden:Boolean;
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of <code>HiddenFileFilter</code>.
+		 * 
+		 * @param hidden a boolean value to signify if hidden files are
+		 * to be selected or else.
 		 */
 		public function HiddenFileFilter(hidden:Boolean = true) {
 			super();

@@ -28,7 +28,7 @@ package com.sangupta.as3utils.filefilter {
 	 * based on a cutoff time. Can filter either newer files or older (cutoff 
 	 * included in both cases). 
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class AgeFileFilter implements IFileFilter {
@@ -38,7 +38,14 @@ package com.sangupta.as3utils.filefilter {
 		private var older:Boolean = false;
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of <code>AgeFileFilter</code>
+		 * 
+		 * @param date the date to be compared against
+		 * 
+		 * @param older a boolean value of <code>true</code> signifies that files
+		 * that were last modified before the given date are selected. A boolean
+		 * value of <code>false</code> signifies that files newer than the given
+		 * date are selected. 
 		 */
 		public function AgeFileFilter(date:Date, older:Boolean = false) {
 			super();

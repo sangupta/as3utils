@@ -24,7 +24,7 @@ package com.sangupta.as3utils {
 	/**
 	 * Utiltiy functions around the <code>Date</code> objects.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class DateUtils {
@@ -43,6 +43,12 @@ package com.sangupta.as3utils {
 		
 		/**
 		 * Compute the difference between the two given dates in milliseconds.
+		 * 
+		 * @param dateBefore the date that occurs earlier in time
+		 * 
+		 * @param dateAhead the date that occurs later in time
+		 * 
+		 * @return the difference between two dates in milliseconds as a <code>Number</code>.
 		 */
 		public static function diffDateInTime(dateBefore:Date, dateAhead:Date):Number {
 			var timeAhead:Number = 0;
@@ -60,13 +66,23 @@ package com.sangupta.as3utils {
 
 		/**
 		 * Compute the difference between the two given dates in number of days.
+		 * 
+		 * @param dateBefore the date that occurs earlier in time
+		 * 
+		 * @param dateAhead the date that occurs later in time
+		 * 
+		 * @return the difference between two dates in number of days as a <code>Number</code>.
 		 */
 		public static function diffDateInDays(dateBefore:Date, dateAhead:Date):Number {
 			return diffDateInTime(dateBefore, dateAhead) / MS_IN_ONE_DAY;
 		}
 		
 		/**
-		 * Returns <code>true</code> if the given year was a leap year, <code>false</code> otherwise.
+		 * Test of the given year is a leap year or not.
+		 * 
+		 * @param year the year as complete 4-digits
+		 * 
+		 * @return Returns <code>true</code> if the given year was a leap year, <code>false</code> otherwise.
 		 */
 		public static function isLeapYear(year:uint):Boolean {
 			if(year % 400 == 0) {
@@ -81,7 +97,11 @@ package com.sangupta.as3utils {
 		}
 		
 		/**
-		 * Returns <code>true</code> if the given date was a leap year, <code>false</code> otherwise.
+		 * Test if the given date is a leap year or not.
+		 * 
+		 * @param date the <code>non-null</code> date to be tested
+		 * 
+		 * @return Returns <code>true</code> if the given date was a leap year, <code>false</code> otherwise.
 		 */
 		public static function isLeap(date:Date):Boolean {
 			if(date == null) {

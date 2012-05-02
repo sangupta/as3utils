@@ -27,7 +27,7 @@ package com.sangupta.as3utils.filefilter {
 	 * An implementation of <code>FileFilter</code> that selects all files
 	 * that match the given name irrespective of the extension.
 	 * 
-	 * @author <a href="http://www.sangupta.com">Sandeep Gupta</a>
+	 * @author sangupta
 	 * @since 1.0
 	 */
 	public class NameFileFilter implements IFileFilter {
@@ -35,7 +35,9 @@ package com.sangupta.as3utils.filefilter {
 		private var name:String = null;
 		
 		/**
-		 * Contructor.
+		 * Create a new instance of <code>NameFileFilter</code>.
+		 * 
+		 * @param name the filename to be matched against.
 		 */
 		public function NameFileFilter(name:String) {
 			super();

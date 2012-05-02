@@ -39,6 +39,13 @@ package com.sangupta.as3utils {
 		/**
 		 * Method that checks whether the given <code>object</code> is present
 		 * in the array using strict === equality.
+		 * 
+		 * @param array the array to be searched
+		 * 
+		 * @object the object to be looked for
+		 * 
+		 * @return <code>true</code> if the item exists inside the array, <code>false</code>
+		 * otherwise.
 		 */
 		public static function has(array:Array, object:Object):Boolean {
 			if(array == null || object == null) {
@@ -57,6 +64,13 @@ package com.sangupta.as3utils {
 		/**
 		 * Method that checks whether the given <code>object</code> is present
 		 * in the array using normal == equality.
+		 * 
+		 * @param array the array in which the existence of item is to be tested
+		 * 
+		 * @param object the object to be looked for
+		 * 
+		 * @return <code>true</code> if the item exists inside the array, <code>false</code>
+		 * otherwise.
 		 */
 		public static function contains(array:Array, object:Object):Boolean {
 			if(array == null || object == null) {
@@ -73,7 +87,12 @@ package com.sangupta.as3utils {
 		}
 		
 		/**
-		 * Remove the given item from the array
+		 * Remove the given item from the array. The method is <code>null</code>
+		 * safe. 
+		 * 
+		 * @param array the array from which the item is to be removed
+		 * 
+		 * @object the item to be removed
 		 */
 		public static function removeItem(array:Array, object:Object):void {
 			if(object != null) {
