@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<project name="as3utils | myJerry" basedir="./../" default="build">
+<project name="as3utils" basedir="./../" default="release">
 
 	<property file="build/build.properties" />
 
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
-
+	
 	<tstamp>
 		<format property="BUILD.TIME" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
@@ -13,33 +13,34 @@
 	<target name="compile">
 		<exec executable="${FLEX_HOME}/bin/acompc.bat" dir="." failonerror="true" failifexecutionfails="true">
 			<arg value="-output" />
-			<arg value="${release.dir}/${project.name}.swc" />
+			<arg value="${release.dir}/lib/${project.name}.swc" />
+			
 			<arg value="-include-sources" />
 			<arg value="${src.dir}" />
+			
 			<arg value="-metadata.creator" />
 			<arg value="${user.name}" />
+			
 			<arg value="-metadata.title" />
-			<arg value="as3utils | myJerry" />
+			<arg value="as3utils" />
+			
 			<arg value="-metadata.date" />
 			<arg value="${BUILD.TIME}" />
+			
 			<arg value="-compiler.optimize" />
 			<arg value="-compiler.omit-trace-statements" />
+			
 			<arg value="-compiler.strict" />
+			
 			<arg value="-compiler.external-library-path" />
 			<arg value="${FLEX_HOME}/frameworks/libs" />
+			
 			<arg value="-compiler.external-library-path" />
 			<arg value="${FLEX_HOME}/frameworks/libs/air" />
+			
 			<arg value="-compiler.external-library-path" />
 			<arg value="${FLEX_HOME}/frameworks/locale/{locale}" />
 		</exec>
-		
-		<!--
-		<compc output="${release.dir}/${project.name}1.swc" debug="false" optimize="true">
-			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml" />
-			<source-path path-element="c:/git/as3utils/src" />
-			<include-sources dir="c:/git/as3utils/src" includes="*" />
-		</compc>
-		-->
 	</target>
 
 	<target name="clean">
@@ -92,5 +93,37 @@
 	<target name="test" depends="compileTests, runTests" />
 
 	<target name="build" depends="clean, test, compile, asdocs" />
+	
+	<target name="release" depends="build" description="Build and release the latest version of the library">
+		<!-- clean previous library -->
+		<delete file="${project.name}-${build.version}.zip" />
+		
+		<!-- clean the staging folder -->
+		<delete file="${release.dir}/UnitTest.swf" />
+		<delete file="${release.dir}/flexUnitDescriptor.xml" />
+		<delete dir="${release.dir}/reports" />
+		
+		<!-- copy stuff to staging folder -->
+		<copy todir="${release.dir}/src">
+			<fileset dir="${src.dir}" />
+		</copy>
+		
+		<copy todir="${release.dir}/tests">
+			<fileset dir="${test.src.dir}" />
+		</copy>
+			
+		<copy todir="${release.dir}">
+			<fileset file="LICENSE" />
+			<fileset file="README.md" />
+		</copy>
+			
+		<!-- package the ZIP file -->
+		<zip destfile="${project.name}-${build.version}.zip">
+			<fileset dir="${release.dir}" defaultexcludes="false"/>
+		</zip>
+		
+		<!-- clean up staging -->
+		<delete dir="${release.dir}" />
+	</target>
 
 </project>
