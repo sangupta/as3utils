@@ -51,11 +51,26 @@
 
 	<target name="asdocs">
 		<exec executable="${FLEX_HOME}/bin/aasdoc.bat" dir="." failonerror="true" failifexecutionfails="true">
-			<arg line="-doc-sources ${src.dir}" />
-			<arg line="-package-description-file=build/packageDescription.xml" />
-			<arg line="-source-path ${src.dir}" />
-			<arg line="-output ${release.dir}/docs" />
-			<arg line="-window-title &quot;${doc.window.title}&quot;" />
+			<arg value="-doc-sources"/>
+			<arg value="${src.dir}" />
+			
+			<arg value="-package-description-file" />
+			<arg value="build/packageDescription.xml" />
+			
+			<arg value="-source-path" />
+			<arg value="${src.dir}" />
+				
+			<arg line="-output" />
+			<arg value="${release.dir}/docs" />
+			
+			<arg line="-window-title" />
+			<arg value="${project.name}" />
+			
+			<arg line="-metadata.contributor" />
+			<arg value="Sandeep Gupta" />
+			
+			<arg line="-footer" />
+			<arg value="© 2011-2012, Sandeep Gupta" />
 		</exec>
 	</target>
 
