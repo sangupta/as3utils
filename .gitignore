@@ -21,3 +21,6 @@ release/*
 
 # Windows noise
 desktop.ini
+
+# Project specific
+*.zip
