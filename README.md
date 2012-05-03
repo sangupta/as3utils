@@ -22,6 +22,11 @@ The library consists of the following utility classes
 
 In addition a special class called `ExtendedEncryptedLocalStore` is provided. This class helps to get/put basic ActionScript data types like `int`, `uint`, `String`, `Number` etc.
 
+Documentation
+-------------
+
+ActionScript documentation for the project is available at http://www.sangupta.com/docs/as3utils
+
 Versioning
 ----------
 
