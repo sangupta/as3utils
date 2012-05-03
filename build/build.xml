@@ -121,9 +121,6 @@
 		<zip destfile="${project.name}-${build.version}.zip">
 			<fileset dir="${release.dir}" defaultexcludes="false"/>
 		</zip>
-		
-		<!-- clean up staging -->
-		<delete dir="${release.dir}" />
 	</target>
 
 </project>
